@@ -1,13 +1,31 @@
 <template>
   <div class="container">
     <!-- 头部 -->
-    <el-header class="header">Header</el-header>
+    <el-header class="header">
+      <el-row>
+        <el-col :span="12">
+          <div class="grid-content bg-purple logo">
+            <img src="@/assets/ali-logo.png" alt />
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="grid-content bg-purple-light">
+            <el-button type="success" class="signOut-btn" @click="signOut">退出</el-button>
+          </div>
+        </el-col>
+      </el-row>
+    </el-header>
     <el-container class="container-box">
       <!-- 主体内容区 -->
       <el-container class="main">
         <!-- 左侧 -->
         <el-aside width="200px" class="main-l">
-          <el-menu :default-active="activeIndex" class="el-menu-demo" @select="change">
+          <el-menu
+            :default-active="activeIndex"
+            :unique-opened="true"
+            class="el-menu-demo"
+            @select="change"
+          >
             <template v-for="item in menu">
               <el-menu-item :index="item.path" width="160px" :key="item.path" v-if="!item.submenu">
                 <i :class="item.icon"></i>
@@ -115,10 +133,17 @@ export default {
     };
   },
   methods: {
+    //切换路由
     change(path, idx) {
       this.activeIndex = path;
       this.currentIndex = idx; //这是点击事件修改的idx值！
       this.$router.push(path);
+    },
+    //退出
+    signOut() {
+      localStorage.clear();
+      this.$message.success("退出成功");
+      this.$router.push("/login");
     },
   },
   components: {},
@@ -131,9 +156,30 @@ export default {
     height: 100%;
   }
   .header {
+    position: relative;
     height: 60px;
     line-height: 60px;
-    background: pink;
+    background: #fff;
+    .logo {
+      height: 20px;
+      img {
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 180px;
+        height: 40px;
+      }
+    }
+
+    .grid-content {
+      position: relative;
+      .signOut-btn {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        margin-left: 20px;
+      }
+    }
   }
   .main {
     height: 100%;
