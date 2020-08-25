@@ -88,7 +88,7 @@ export default {
       const { data } = await this.$request.get(
         `/morder?page=${this.pageNum}&size=${this.pageSize}`
       );
-      // console.log("我是订单", data, data.datalen);
+      console.log("我是订单", data, data.datalen);
       this.tableData = data.data;
       this.total = data.datalen;
     },

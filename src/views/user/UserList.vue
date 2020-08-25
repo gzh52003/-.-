@@ -135,7 +135,7 @@ export default {
 
     async searchUser() {
       console.log(this.query);
-      const { data } = await this.$request.get(`/user?username=` + this.query);
+      const { data } = await this.$request.get(`/muser?username=` + this.query);
       console.log(data);
       if (data.code === 1) {
         this.userlist = data.data;
