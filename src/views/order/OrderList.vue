@@ -127,6 +127,7 @@ export default {
           const res = await this.$request.delete("/morder/" + this.userid);
           if (res.status === 200) {
             this.tableData = this.tableData.filter((item) => item._id !== id);
+            this.getOrderList();
             this.$message({
               type: "success",
               message: "删除成功!",
