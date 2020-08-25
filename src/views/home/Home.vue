@@ -77,10 +77,6 @@ export default {
               text: "用户列表",
               path: "/list",
             },
-            {
-              text: "添加用户",
-              path: "/add",
-            },
           ],
         },
         {
@@ -168,7 +164,7 @@ export default {
   .main {
     height: 100%;
     .main-l {
-      background: olive;
+      background: #fff;
     }
     .main-r {
       background: yellow;

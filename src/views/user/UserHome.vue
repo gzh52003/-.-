@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-    我是用户默认
+  <div>
     <router-view />
   </div>
 </template>

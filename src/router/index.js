@@ -36,11 +36,10 @@ let routes = [{
             path: 'list',
             name: 'UserList',
             component: () => import('../views/user/UserList.vue')
-          },
-          {
-            path: 'add',
-            name: 'UserAdd',
-            component: () => import('../views/user/UserAdd.vue')
+          }, {
+            path: 'updata',
+            name: 'UserUpdata',
+            component: () => import('../views/user/UserUpdata.vue')
           }
         ]
       },
