@@ -4,8 +4,6 @@ import VueRouter from "vue-router"
 
 Vue.use(VueRouter)
 
-
-
 let routes = [{
     path: "/",
     redirect: "/login",
@@ -43,14 +41,6 @@ let routes = [{
             path: 'add',
             name: 'UserAdd',
             component: () => import('../views/user/UserAdd.vue')
-          }, {
-            path: 'del',
-            name: 'UserDel',
-            component: () => import( /* webpackChunkName: "about" */ '../views/user/UserDel.vue')
-          }, {
-            path: 'updata',
-            name: 'UserUpdata',
-            component: () => import( /* webpackChunkName: "about" */ '../views/user/UserUpdata.vue')
           }
         ]
       },
@@ -71,9 +61,9 @@ let routes = [{
           name: "LibraryAdd",
           component: () => import("../views/library/LibraryAdd.vue")
         }, {
-          path: "updata",
-          name: "LibraryUpdata",
-          component: () => import("../views/library/LibraryUpdata.vue")
+          path: "type",
+          name: "LibraryType",
+          component: () => import("../views/library/LibraryType.vue")
         }]
       },
       //订单管理相关路由
@@ -81,33 +71,17 @@ let routes = [{
         path: "/order",
         component: () => import("../views/order/OrderHome.vue"),
         children: [{
-            path: "/",
-            redirect: "list"
-          }, {
-            path: "list",
-            name: "OrderList",
-            component: () => import("../views/order/OrderList.vue"),
-          }, {
-            path: "add",
-            name: "OrderAdd",
-            component: () => import("../views/order/OrderAdd.vue"),
-          },
-          {
-            path: "del",
-            name: "OrderDel",
-            component: () => import("../views/order/OrderDel.vue"),
-          },
-          {
-            path: "updata",
-            name: "OrderUpdata",
-            component: () => import("../views/order/OrderUpdata.vue"),
-          },
-          {
-            path: "find",
-            name: "OrderFind",
-            component: () => import("../views/order/OrderFind.vue"),
-          },
-        ]
+          path: "/",
+          redirect: "list"
+        }, {
+          path: "list",
+          name: "OrderList",
+          component: () => import("../views/order/OrderList.vue"),
+        }, {
+          path: "updata",
+          name: "OrderUpdata",
+          component: () => import("../views/order/OrderUpdata.vue"),
+        }, ]
       }
     ]
   },
