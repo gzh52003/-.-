@@ -81,18 +81,10 @@ export default {
               text: "添加用户",
               path: "/add",
             },
-            {
-              text: "修改用户",
-              path: "/updata",
-            },
-            {
-              text: "删除用户",
-              path: "/del",
-            },
           ],
         },
         {
-          text: "商品管理",
+          text: "图书管理",
           path: "/library",
           icon: "el-icon-grape",
           submenu: [
@@ -105,8 +97,8 @@ export default {
               path: "/add",
             },
             {
-              text: "修改图书",
-              path: "/updata",
+              text: "图书分类",
+              path: "/type",
             },
           ],
         },
@@ -118,14 +110,6 @@ export default {
             {
               text: "订单列表",
               path: "/list",
-            },
-            {
-              text: "修改订单",
-              path: "/updata",
-            },
-            {
-              text: "删除订单",
-              path: "/del",
             },
           ],
         },
