@@ -15,11 +15,18 @@
         >
           <el-button slot="append" icon="el-icon-search" @click="searchBtn"></el-button>
         </el-input>
+        <el-button type="success" class="batchDel-btn" @click="batchDel">批量删除</el-button>
       </el-col>
     </el-row>
 
     <!-- 表格 -->
-    <el-table :data="tableData" style="width: 100%" class="order-table">
+    <el-table
+      :data="tableData"
+      @selection-change="changeSelect"
+      style="width: 100%"
+      class="order-table"
+    >
+      <el-table-column type="selection" label="序号" width="60"></el-table-column>
       <el-table-column type="index" label="编号"></el-table-column>
       <el-table-column prop="orderNum" label="订单编号" width="180"></el-table-column>
       <el-table-column prop="orderPrice" label="订单价格"></el-table-column>
@@ -67,6 +74,7 @@ export default {
   data() {
     return {
       tableData: [],
+      multipleTable: [],
       userid: "",
       total: 0,
       pageNum: 1,
@@ -86,9 +94,9 @@ export default {
     //获取到订单列表
     async getOrderList() {
       const { data } = await this.$request.get(
-        `/morder?page=${this.pageNum}&size=${this.pageSize}`
+        `/order?page=${this.pageNum}&size=${this.pageSize}`
       );
-      console.log("我是订单", data, data.datalen);
+      // console.log("我是订单", data.data);
       this.tableData = data.data;
       this.total = data.datalen;
     },
@@ -101,7 +109,7 @@ export default {
       if (this.query !== "") {
         this.query = this.query.trim();
         const { data } = await this.$request.get(
-          `/morder?query=${this.query}&page=${this.pageNum}&size=${this.pageSize}`
+          `/order?query=${this.query}&page=${this.pageNum}&size=${this.pageSize}`
         );
         this.tableData = data.data;
         this.total = data.data.length;
@@ -115,6 +123,26 @@ export default {
         params: { id },
       });
     },
+    //所点击复选框的事件
+    changeSelect(val) {
+      //获取用户的选中
+      this.multipleSelection = [];
+      val.forEach((item) => {
+        this.multipleSelection.push(item["_id"]);
+      });
+      this.multipleSelection = Array.from(new Set(this.multipleSelection));
+      // console.log("我是最终的", this.multipleSelection);
+    },
+    //点击批量删除
+    async batchDel() {
+      //发起请求：
+      if (this.multipleSelection !== undefined) {
+        await this.$request.delete(
+          "/order/delArr/" + this.multipleSelection.join(",")
+        );
+        this.getOrderList();
+      }
+    },
     //点击删除
     del(id) {
       this.userid = id;
@@ -124,7 +152,7 @@ export default {
         type: "warning",
       })
         .then(async () => {
-          const res = await this.$request.delete("/morder/" + this.userid);
+          const res = await this.$request.delete("/order/" + this.userid);
           if (res.status === 200) {
             this.tableData = this.tableData.filter((item) => item._id !== id);
             this.getOrderList();
@@ -163,12 +191,15 @@ export default {
   .search-wrap {
     position: absolute;
     left: 40px;
-    width: 350px;
+    width: 520px;
     margin: 20px 0;
     .input-select {
       width: 350px;
     }
     .add-btn {
+      margin-left: 20px;
+    }
+    .batchDel-btn {
       margin-left: 20px;
     }
   }

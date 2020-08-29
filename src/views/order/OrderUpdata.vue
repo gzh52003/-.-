@@ -91,7 +91,7 @@ export default {
     async request() {
       const { id } = this.$route.params;
       this.userid = id;
-      const { data } = await this.$request.get("morder/" + id);
+      const { data } = await this.$request.get("order/" + id);
       // console.log("我是订单更新", data);
       this.ruleForm = data.data;
       // //存入本地存储
@@ -100,7 +100,7 @@ export default {
     async submitForm() {
       const { ruleForm } = this;
       const userid = ruleForm._id;
-      const res = await this.$request.put("/morder/" + userid, {
+      const res = await this.$request.put("/order/" + userid, {
         ...ruleForm,
       });
       localStorage.setItem("currentOrder", JSON.stringify(res.data.data));
