@@ -140,6 +140,7 @@ export default {
         await this.$request.delete(
           "/order/delArr/" + this.multipleSelection.join(",")
         );
+        this.$message.success("批量删除成功！");
         this.getOrderList();
       }
     },

@@ -28,19 +28,22 @@ export default {
   },
   methods: {
     goto() {
-      // this.$request.post("/mlogin", this.formData).then((res) => {
-      //   const data = res.data;
-      //   if (data.code === 1) {
-      //     this.$message.success("登录成功");
-      //     //保存token值
-      //     let token = data.data.authorization;
-      //     localStorage.setItem("token", token);
-      //     //跳转到首页
-      this.$router.push("/home");
-      //   } else {
-      //     this.$message.error("用户名或密码错误");
-      //   }
-      // });
+      this.$request.post("/login", this.formData).then((res) => {
+        console.log("我是登录", res);
+        const data = res.data;
+        if (data.code === 1) {
+          this.$message.success("登录成功");
+          //保存token值
+          let userInfo = data.data;
+          localStorage.setItem("userInfo", JSON.stringify(userInfo));
+          //跳转到首页
+          this.$router.push({
+            name: "Home",
+          });
+        } else {
+          this.$message.error("用户名或密码错误");
+        }
+      });
     },
   },
 };

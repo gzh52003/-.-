@@ -110,7 +110,7 @@ export default {
     // 获取数据并渲染到页面
     async getGoodsList() {
       const res = await this.$request.get(
-        `/mlibrary?query=${this.query}&page=${this.page}&size=${this.size}`
+        `/library?query=${this.query}&page=${this.page}&size=${this.size}`
       );
       if (res.status === 200) {
         // 1、给表格数据赋值
@@ -141,7 +141,7 @@ export default {
     async searchBook() {
       if (this.query) {
         const res = await this.$request.get(
-          `/mlibrary?query=${this.query}&page=${this.page}&size=${this.size}`
+          `/library?query=${this.query}&page=${this.page}&size=${this.size}`
         );
         console.log("我是搜索", res);
         if (res.status === 200) {
@@ -184,8 +184,8 @@ export default {
         return this.$message.info("已取消删除！");
       }
 
-      const res = await this.$request.delete("/mlibrary/" + id);
-      console.log(res);
+      const res = await this.$request.delete("/library/" + id);
+      console.log("我是删除", res);
       if (res.data !== "success") {
         return this.$message.error("删除书籍失败！");
       }
@@ -197,14 +197,14 @@ export default {
     async editbook(id) {
       this.dialogFormVisible = true;
       this.pid = id;
-      const res = await this.$request.get(`/mlibrary/${id}`);
+      const res = await this.$request.get(`/library/${id}`);
       // console.log(res.data.data.result[0]);
       this.form = res.data.data.result[0];
     },
     // 编辑某一条数据
     async update() {
       this.dialogFormVisible = false;
-      const res = await this.$request.put(`/mlibrary/${this.pid}`, this.form);
+      const res = await this.$request.put(`/library/${this.pid}`, this.form);
       if (res.data.code === 1) {
         this.$message.success("更新书籍成功！");
       } else {

@@ -198,7 +198,7 @@ export default {
         return;
       } else {
         this.form.date = this.setTime;
-        const res = await this.$request.post("/mlibrary", this.form);
+        const res = await this.$request.post("/library", this.form);
         console.log(res);
         this.$message.success("添加书籍成功");
       }
